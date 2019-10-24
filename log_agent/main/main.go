@@ -24,7 +24,7 @@ func main(){
 
 	logs.Debug("load conf succ, config:%v", appConfig)
 
-	err = tailf.InitTail()
+	err = tailf.InitTail(appConfig.collectConf, appConfig.chanSize)
 	if err != nil {
 		logs.Error("init tail failed, err:%v", err)
 		return

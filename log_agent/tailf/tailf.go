@@ -17,19 +17,25 @@ type TailObj struct {
 	conf CollectConf
 }
 
-type TestMsg struct {
+type TextMsg struct {
 	Msg   string
 	Topic string
 }
 
 type TailObjMgr struct {
 	tailObjs []*TailObj
-	msgChan  chan *TestMsg
+	msgChan  chan *TextMsg
 }
 
 var (
 	tailObjMgr *TailObjMgr
 )
+
+func GetOneLine()(msg *TextMsg){
+	msg = <- tailObjMgr.msgChan
+	return msg
+}
+
 
 func InitTail(conf []CollectConf, chanSize int) (err error) {
 	if len(conf) == 0 {
@@ -76,7 +82,7 @@ func readFromTail(tailObj *TailObj) {
 			continue
 		}
 
-		textMsg := &TestMsg{
+		textMsg := &TextMsg{
 			Msg:   line.Text,
 			Topic: tailObj.conf.Topic,
 		}

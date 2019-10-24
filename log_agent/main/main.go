@@ -38,6 +38,14 @@ func main(){
 		return
 	}
 
+	//初始化etcd
+	err = initEtcd(appConfig.etcdAddr, appConfig.etcdKey)
+	if err != nil {
+		logs.Error("init etcd failed, err:%v", err)
+		return
+	}
+
+
 	// 开始服务
 	err = ServerRun()
 	if err != nil {

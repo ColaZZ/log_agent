@@ -39,7 +39,7 @@ func main(){
 	}
 
 	//初始化etcd
-	err = initEtcd(appConfig.etcdAddr, appConfig.etcdKey)
+	collectConf, err := initEtcd(appConfig.etcdAddr, appConfig.etcdKey)
 	if err != nil {
 		logs.Error("init etcd failed, err:%v", err)
 		return
